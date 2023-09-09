@@ -126,19 +126,17 @@ class Conf:
             self.y(j + 1)
         ]
 
-    def update(self, eo):
-        for i in range(self.L // 2):
-            for j in range(self.M // 2):
-                ix, iy = 2 * i + eo - 1, 2 * j + eo
-                if self.filpable(ix, iy):
-                    rand = np.random.rand()
-                    print(
-                        self.get_rn(ix, iy)
-                        * self.get_re(ix, iy)
-                        * self.get_rs(ix, iy)
-                        * self.get_rw(ix, iy)
-                    )
-                    if rand < self.get_rn(ix, iy) * self.get_re(ix, iy) * self.get_rs(
-                        ix, iy
-                    ) * self.get_rw(ix, iy):
-                        self.flip(ix, iy)
+    def update(self, i, j, eo):
+        ix, iy = self.x(2 * i + eo - 1), self.y(2 * j + eo)
+        if self.filpable(ix, iy):
+            rand = np.random.rand()
+            print(
+                self.get_rn(ix, iy)
+                * self.get_re(ix, iy)
+                * self.get_rs(ix, iy)
+                * self.get_rw(ix, iy)
+            )
+            if rand < self.get_rn(ix, iy) * self.get_re(ix, iy) * self.get_rs(
+                ix, iy
+            ) * self.get_rw(ix, iy):
+                self.flip(ix, iy)
